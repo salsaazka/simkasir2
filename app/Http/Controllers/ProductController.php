@@ -63,7 +63,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $dataProduct::where('id', $id)->first();
+        $dataProduct= Product::where('id', $id)->first();
         return view('pages.product.edit', compact('dataProduct'));
     }
 
@@ -75,7 +75,7 @@ class ProductController extends Controller
         $request->validate = ([
             'name' => 'required',
             'price' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Tambahkan validasi untuk jenis file dan ukuran maksimum
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Tambahkan validasi untuk jenis file dan ukuran maksimum
         ]);
 
         $image = $request->file('image');

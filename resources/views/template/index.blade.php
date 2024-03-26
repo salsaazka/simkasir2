@@ -31,6 +31,8 @@
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Home</span>
                         </li>
+                        
+                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'cashier')
                         <li class="sidebar-item">
                             <a class="sidebar-link {{ Route::currentRouteName() === 'dashboard' ? 'active' : '' }}" href="{{ route('dashboard') }}" aria-expanded="false">
                                 <span>
@@ -44,7 +46,7 @@
                             <span class="hide-menu">Pages</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link {{ Route::currentRouteName() === 'product.index' ? 'active' : '' }}" href="{{ route('product.index') }}" aria-expanded="false">
+                            <a class="sidebar-link {{ Route::currentRouteName() === 'product' ? 'active' : '' }}" href="{{ route('product.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-shopping-cart"></i>
                                 </span>
@@ -54,19 +56,23 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link {{ Route::currentRouteName() === 'sale.index' ? 'active' : '' }}" href="{{ route('sale.index') }}" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-users"></i>
+                                    <i class="ti ti-brand-cashapp"></i>
                                 </span>
                                 <span class="hide-menu">Sale</span>
                             </a>
-                        {{-- </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link {{ Route::currentRouteName() === 'user.index' ? 'active' : '' }}" href="{{ route('user.index') }}" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-brand-cashapp"></i>
-                                </span>
-                                <span class="hide-menu">User</span>
-                            </a>
-                        </li> --}}
+                        </li>
+                        @endif
+                        @if (auth()->user()->role === 'admin')
+                            
+                            <li class="sidebar-item">
+                                <a class="sidebar-link {{ Route::currentRouteName() === 'user.index' ? 'active' : '' }}" href="{{ route('user.index') }}" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-users"></i>
+                                    </span>
+                                    <span class="hide-menu">User</span>
+                                </a>
+                            </li>
+                        @endif
                         {{-- <li class="sidebar-item">
                             <a class="sidebar-link {{ Route::currentRouteName() === 'transaksi' ? 'active' : '' }}" href="{{ route('transaksi') }}" aria-expanded="false">
                                 <span>

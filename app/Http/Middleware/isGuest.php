@@ -11,7 +11,7 @@ class isGuest
     {
          if(Auth::check()) {
             //kalau gak ada history login bakal dikembalikan ke halaman login dengan pesan error
-           return redirect()->route('dashboard')->with('notAllowed', 'Anda sudah login!');
+           return redirect()->route('product.index')->with('notAllowed', 'Anda sudah login!');
            }
 
             return $next($request);

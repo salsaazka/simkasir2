@@ -8,7 +8,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\DetailSaleController;
 use App\Http\Middleware\isLogin;
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->name('dashboard');
 
@@ -24,7 +24,7 @@ Route::get('/transaksi', function () {
 //     return view('auth.signin');
 // })->name('signIn');
 Route::middleware('isGuest')->group(function () {
-    Route::get('/sign-in', [AuthController::class, 'signIn'])->name('signIn');
+    Route::get('/', [AuthController::class, 'signIn'])->name('signIn');
     Route::post('/sign-in', [AuthController::class, 'auth'])->name('auth');
     Route::get('/sign-up', [AuthController::class, 'signUp'])->name('signUp');
     Route::post('/sign-up', [AuthController::class, 'register'])->name('register');
@@ -36,7 +36,12 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('isLogin')->prefix('/user')->name('user.')->group(function () {
     Route::get('/', [AuthController::class, 'user'])->name('index');
+    Route::get('/create-user', [AuthController::class, 'viewUser'])->name('create');
     Route::post('/create-user', [AuthController::class, 'createUser'])->name('store');
+    Route::get('/edit{id}', [AuthController::class, 'editUser'])->name('edit');
+    Route::patch('/update/{id}', [AuthController::class, 'updateUser'])->name('update');
+    Route::delete('/delete/{id}', [AuthController::class, 'destroyUser'])->name('destroy');
+
 });
 // Buyer
 Route::middleware('isLogin')->prefix('/buyer')->name('buyer.')->group(function () {
@@ -51,7 +56,7 @@ Route::middleware('isLogin')->prefix('/buyer')->name('buyer.')->group(function (
 
 // Product
 Route::middleware('isLogin')->prefix('/product')->name('product.')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::get('/', [ProductController::class, 'index'])->name('index')->middleware('isLogin');
     Route::get('/create-product', [ProductController::class, 'create'])->name('create');
     Route::post('/create-product', [ProductController::class, 'store'])->name('store');
     Route::get('/edit{id}', [ProductController::class, 'edit'])->name('edit');

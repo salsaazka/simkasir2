@@ -2,50 +2,50 @@
 
 @section('content-admin')
 <div>
+    
     <div class="row">
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                    <h6>Data Product</h6>
-                    <a href="{{ route('product.create') }}" class="btn add-new btn-primary m-1 float-end"><i class="fa-solid fa-plus"></i></a>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
+        <div class="card w-100">
+            <div class="card-body p-4">
+                <h5 class="card-title fw-semibold mb-4">Data user</h5>
+                    <a href="{{ route('user.create') }}" class="btn add-new btn-primary m-1 float-end"><i class="ti ti-plus"></i></a>
+                    <div class="table-responsive">
+                        <table class="table text-nowrap mb-0 align-middle">
+                            <thead class="text-dark fs-4">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        No</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Image</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Nama</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Price</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Stok</th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Id</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Name</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Username</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Email</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Role</h6>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
                                     $no = 1;
                                 @endphp
-                                @foreach ($dataProduct as $product)
+                                @foreach ($dataUser as $user)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>
-                                        <img src="{{ asset('assets/images/data/' . $product['image']) }}"
-                                            alt="Book Image" width="50" height="50">
-                                    </td>
-                                    <td>{{ $product['name'] }}</td>
-                                    <td>{{ $product['price'] }}</td>
-                                    <td>{{ $product['stok'] }}</td>
+                                    <td>{{ $user['name'] }}</td>
+                                    <td>{{ $user['username'] }}</td>
+                                    <td>{{ $user['role'] }}</td>
+                                    <td>{{ $user['email'] }}</td>
                                     <td class="d-flex">
-                                        <a href="{{ route('product.edit', $product->id) }} " class="btn btn-warning" style="margin-right: 5px"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <form action="/product/delete/{{ $product->id }}" method="POST">
+                                        <a href="{{ route('user.edit', $user->id) }} " class="btn btn-warning" style="margin-right: 5px"><i class="ti ti-edit"></i></a>
+                                        <form action="/user/delete/{{ $user->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                            <button type="submit" class="btn btn-danger"><i class="ti ti-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>

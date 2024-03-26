@@ -13,7 +13,7 @@ class SaleController extends Controller
     public function index()
     {
         $dataSale = Sale::all();
-        return view('', compact('dataSale'));
+        return view('pages.sale.index', compact('dataSale'));
     }
 
     /**
@@ -21,7 +21,7 @@ class SaleController extends Controller
      */
     public function create()
     {
-        // return view()
+        return view('pages.sale.create');
     }
 
     /**
