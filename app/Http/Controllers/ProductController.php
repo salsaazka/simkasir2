@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         $dataProduct = Product::all();
-        return view('', compact('dataProduct'));
+        return view('pages.product.index', compact('dataProduct'));
     }
 
     /**
@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // return view();
+        return view('pages.product.create');
     }
 
     /**
@@ -32,14 +32,22 @@ class ProductController extends Controller
         $request->validate = ([
             'name' => 'required',
             'price' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Tambahkan validasi untuk jenis file dan ukuran maksimum
         ]);
+
+        $image = $request->file('image');
+        $imgName = time() . rand() . '.' . $image->getClientOriginalExtension();
+
+        $dPath = public_path('/assets/images/data/');
+        $image->move($dPath, $imgName);
 
         Product::create([
             'name' => $request->name,
+            'image' => $imgName,
             'price' => $request->price,
             'stock' => $request->stock,
         ]);
-        // return redirect()->route('');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -56,7 +64,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $dataProduct::where('id', $id)->first();
-        // return view('', compact('dataProduct'));
+        return view('pages.product.edit', compact('dataProduct'));
     }
 
     /**
@@ -73,16 +81,16 @@ class ProductController extends Controller
         $image = $request->file('image');
         $imgName = time() . rand() . '.' . $image->getClientOriginalExtension();
 
-        $dPath = public_path('/assets/img/data/');
+        $dPath = public_path('/assets/images/data/');
         $image->move($dPath, $imgName);
 
         Product::where('id', $id)->update([
             'name' => $request->name,
-            'name' => $imgName,
+            'image' => $imgName,
             'price' => $request->price,
             'stock' => $request->stock,
         ]);
-        // return redirect()->route('');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -91,6 +99,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::where('id', $id)->delete();
-          // return redirect()->route('');
+          return redirect()->route('product.index');
     }
 }

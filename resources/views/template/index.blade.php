@@ -44,13 +44,37 @@
                             <span class="hide-menu">Pages</span>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link {{ Route::currentRouteName() === 'product.index' ? 'active' : '' }}" href="{{ route('product.index') }}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-shopping-cart"></i>
+                                </span>
+                                <span class="hide-menu">Product</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link {{ Route::currentRouteName() === 'sale.index' ? 'active' : '' }}" href="{{ route('sale.index') }}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-users"></i>
+                                </span>
+                                <span class="hide-menu">Sale</span>
+                            </a>
+                        {{-- </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link {{ Route::currentRouteName() === 'user.index' ? 'active' : '' }}" href="{{ route('user.index') }}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-brand-cashapp"></i>
+                                </span>
+                                <span class="hide-menu">User</span>
+                            </a>
+                        </li> --}}
+                        {{-- <li class="sidebar-item">
                             <a class="sidebar-link {{ Route::currentRouteName() === 'transaksi' ? 'active' : '' }}" href="{{ route('transaksi') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-brand-cashapp"></i>
                                 </span>
                                 <span class="hide-menu">Transaction</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -87,7 +111,7 @@
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">My Profile</p>
                                         </a>
-                                        <a href="./authentication-login.html"
+                                        <a href="{{ route('logout') }}"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                     </div>
                                 </div>
